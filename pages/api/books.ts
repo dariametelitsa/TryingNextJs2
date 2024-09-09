@@ -8,7 +8,7 @@ const booksDB = [
     {id: 3, title: 'Simple'},
 ];
 
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
@@ -18,6 +18,7 @@ export default function handler(
         if(term){
             books = books.filter(book => (book.title.toLowerCase().includes((term.toLowerCase()))));
         }
+        await res.revalidate('/characters');
         res.status(200).json(books);
     }
     if(req.method === "POST") {}
