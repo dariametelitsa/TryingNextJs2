@@ -3,6 +3,8 @@ import { Header } from "components/Header/Header";
 import { PageWrapper } from "components/PageWrapper/PageWrapper";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { Card } from "components/Card/Card";
+import { getLayout } from "components/Layout/BaseLayout/BaseLayout";
+import Characters from "pages/characters";
 
 export const getStaticProps = async () => {
     const queryClient = new QueryClient()
@@ -33,10 +35,10 @@ const Locations = () => {
     ))
     return (
         <PageWrapper>
-            <Header/>
             {locationsList}
         </PageWrapper>
     );
 };
 
+Locations.getLayout = getLayout;
 export default Locations

@@ -18,7 +18,5 @@ export const useLoader = () => {
             router.events.off('routeChangeComplete', endLoading);
             router.events.off('routeChangeError', endLoading);
         }
-    })
-
-
+    }, [router])
 }
