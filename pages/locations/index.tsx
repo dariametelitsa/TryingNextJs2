@@ -1,22 +1,20 @@
-import { API } from "assets/api/api";
 import { LocationType, ResponseType } from "assets/api/rick-and-morty-api";
 import { Header } from "components/Header/Header";
 import { PageWrapper } from "components/PageWrapper/PageWrapper";
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { Card } from "components/Card/Card";
 
-// export const getStaticProps = async () => {
-//     const locations = await API.rickAndMorty.getLocations();
-//
-//     return {
-//         props: {
-//             locations
-//         }
-//     }
-// }
+export const getStaticProps = async () => {
+    const queryClient = new QueryClient()
 
-// type Props = {
-//     locations: ResponseType<LocationType>
-// }
+    await queryClient.fetchQuery(['locations'], getLocations);
+
+    return {
+        props: {
+           dehydratedState: dehydrate(queryClient)
+        }
+    }
+}
 
 const getLocations = () => {
     return fetch('https://rickandmortyapi.com/api/location', {
@@ -31,7 +29,7 @@ const Locations = () => {
     if (!locations) return null;
 
     const locationsList = locations.results.map(location => (
-        <div key={location.id}>{location.name}</div>
+        <Card key={location.id} name={location.name}/>
     ))
     return (
         <PageWrapper>
