@@ -10,7 +10,8 @@ export const getStaticProps = async () => {
     return {
         props: {
             characters
-        }
+        },
+        //revalidate: 30
     }
 }
 

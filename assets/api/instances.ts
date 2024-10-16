@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as process from "node:process";
 
 /**
  * Instance for NextJS API
@@ -6,7 +7,6 @@ import axios from "axios";
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
-
 /**
  * Instance for Rick and Morty API
  */
